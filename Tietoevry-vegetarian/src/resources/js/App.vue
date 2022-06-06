@@ -1,7 +1,7 @@
 <script setup>
-import Header from './components/header/HeaderComponent'
-import Main from './components/main/MainComponent'
-import Footer from './components/footer/FooterComponent'
+import Header from './components/header/HeaderComponent';
+import Main from './components/main/MainComponent';
+import Footer from './components/footer/FooterComponent';
 
 </script>
 
