@@ -54,11 +54,7 @@ class ProductsController extends Controller
     {
         $result = new Collection();
 
-//        if ($request->kcal) {
         $calories = $request->kcal;
-//        } else {
-//            $calories = 2000;
-//        }
 
         $part = $calories / 4;
 
