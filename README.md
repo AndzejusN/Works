@@ -10,7 +10,7 @@
 
 ### database:
 
-- Copy in directory: Tietoevry-vegetarian/db_copy
+- Copy in directory: Tietoevry-vegetarian/other/db_copy
 
 - Or command in Docker container: laravel-tietoevry-php:
 
