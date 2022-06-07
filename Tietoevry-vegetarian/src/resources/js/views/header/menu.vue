@@ -16,22 +16,17 @@ let nut = ref(0);
 let spinner = ref(false);
 let errorMessage = ref(null);
 
-function loadProducts(url = './data/menu') {
-    fetch(url).then(response => response.json()).then(data => {
-        state.products = data.products;
-    });
-}
-
 function getMenu() {
+
     if (isNaN(result.value)) {
         result.value = 0;
         return errorMessage.value = "Please enter correct data to count.";
     } else {
+        state.products = [];
         errorMessage.value = null;
         spinner.value = true;
 
         let url = './data/menu';
-
         const requestOptions = {
             method: "POST",
             headers: {

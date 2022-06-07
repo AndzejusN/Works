@@ -23171,20 +23171,12 @@ __webpack_require__.r(__webpack_exports__);
     var spinner = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
     var errorMessage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
 
-    function loadProducts() {
-      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : './data/menu';
-      fetch(url).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        state.products = data.products;
-      });
-    }
-
     function getMenu() {
       if (isNaN(result.value)) {
         result.value = 0;
         return errorMessage.value = "Please enter correct data to count.";
       } else {
+        state.products = [];
         errorMessage.value = null;
         spinner.value = true;
         var url = './data/menu';
@@ -23217,7 +23209,6 @@ __webpack_require__.r(__webpack_exports__);
       nut: nut,
       spinner: spinner,
       errorMessage: errorMessage,
-      loadProducts: loadProducts,
       getMenu: getMenu,
       SpinnerView: _partials_spinner__WEBPACK_IMPORTED_MODULE_0__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
