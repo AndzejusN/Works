@@ -15,7 +15,7 @@ const state = reactive({
     students: [],
 })
 
-function listStudents(url = '/students') {
+function listStudents(url = 'v1/students/') {
     spinner.value = true;
     fetch(url).then(response => response.json()).then(data => {
         state.students = data.students;

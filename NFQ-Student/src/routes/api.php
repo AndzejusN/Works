@@ -15,5 +15,10 @@ use \App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/students', [StudentController::class, 'index'])->name('students.list');
-Route::get('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+Route::prefix('/v1')->name('v1.')->group(function () {
+    Route::prefix('/students')->name('students.')->group(function () {
+        Route::get('/', [StudentController::class, 'index'])->name('list');
+        Route::get('/delete/{id}', [StudentController::class, 'destroy'])->name('destroy');
+        Route::post('/store/{id?}', [StudentController::class, 'store'])->name('store');
+    });
+});
