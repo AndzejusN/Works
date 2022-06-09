@@ -82,7 +82,7 @@ class StudentController extends Controller
      * @param \App\Models\Student $student
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Student $student, $id)
+    public function destroy($id)
     {
         $student = Student::where('id', $id);
 
