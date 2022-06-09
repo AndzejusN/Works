@@ -1,9 +1,15 @@
 <script setup>
 
-import Test from './components/ExampleComponent';
+import Status from './components/StatusPage';
+import Header from './components/header/HeaderComponent';
+import Footer from './components/footer/FooterComponent';
 
 </script>
 
 <template>
-    <Test/>
+    <div class="container">
+        <Header/>
+        <Status/>
+        <Footer/>
+    </div>
 </template>

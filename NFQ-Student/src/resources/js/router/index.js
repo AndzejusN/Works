@@ -1,20 +1,39 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import IndexView from '../views/IndexView.vue';
-import SecondView from '../views/SecondView.vue';
+import StatusView from '../views/header/StatusView.vue';
+import ProjectView from '../views/header/ProjectView.vue';
+
+import AboutView from '../views/footer/AboutView.vue';
+import CompanyView from '../views/footer/CompanyView.vue';
+import WorkView from '../views/footer/WorkView.vue';
 
 const router = createRouter({
     history: createWebHistory('/'),
     routes: [
         {
             path: '/',
-            name: 'test1',
-            component: IndexView
+            name: 'index',
+            component: ProjectView
         },
         {
-            path: '/second',
-            name: 'test2',
-            component: SecondView
+            path: '/status',
+            name: 'status',
+            component: StatusView
+        },
+        {
+            path: '/company',
+            name: 'company',
+            component: CompanyView
+        },
+        {
+            path: '/work',
+            name: 'work',
+            component: WorkView
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: AboutView
         },
     ]
 });

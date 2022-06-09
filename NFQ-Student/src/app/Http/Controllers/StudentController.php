@@ -10,11 +10,15 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        $query = Student::OrderBy('id');
+
+        $students = $query->get();
+
+        return response()->json(compact('students'));
     }
 
     /**

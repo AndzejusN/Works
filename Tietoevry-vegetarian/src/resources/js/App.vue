@@ -11,5 +11,4 @@ import Footer from './components/footer/FooterComponent';
         <Main/>
         <Footer/>
     </div>
-
 </template>
