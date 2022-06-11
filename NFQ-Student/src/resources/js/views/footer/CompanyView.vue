@@ -20,8 +20,8 @@ export default {
 
 <style scoped>
 * {
-    color: white;
-    text-shadow: 1px 1px 1px #000, 2px 2px 2px darkblue;
+    color: black;
+    text-shadow: 1px 1px 1px darkblue;
 }
 
 .narrow {

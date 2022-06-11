@@ -10298,6 +10298,7 @@ footer {
   left: 0;
   height: 100px;
   width: 100%;
+  z-index: 200;
   background-color: white;
 }
 

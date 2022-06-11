@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->id()->from(1);
             $table->string('name',255);
-            $table->tinyInteger('groups')->unsigned();
+            $table->tinyInteger('groups')->unsigned()->default(0);
+            $table->tinyInteger('students')->unsigned()->default(0);
             $table->timestamps();
         });
     }

@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h3>TO DO</h3>
+        <div id="demo">
+            <img src="/files/img/work_nfq.png" alt="Points to do"/>
+        </div>
     </div>
 </template>
 

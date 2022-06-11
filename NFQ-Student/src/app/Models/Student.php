@@ -15,4 +15,9 @@ class Student extends Model
         'name',
         'group_id',
     ];
+
+    public function group_id(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
+    }
 }

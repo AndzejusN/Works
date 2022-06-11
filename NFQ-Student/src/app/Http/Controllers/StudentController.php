@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -22,13 +23,18 @@ class StudentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function create(StudentRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $check = Student::create($validated);
+
+        return response()->json(compact('check'));
     }
 
     /**
