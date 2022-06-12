@@ -52,6 +52,7 @@ function createProject() {
             studentsNr.value = 0;
             name.value = '';
             spinner.value = false;
+            listProjects();
         });
 }
 
