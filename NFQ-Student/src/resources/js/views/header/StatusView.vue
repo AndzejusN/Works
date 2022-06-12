@@ -2,7 +2,7 @@
 
 export default {
     name: "status",
-    data () {
+    data() {
         return {
             dialog: false,
         }
@@ -76,6 +76,30 @@ listStudents();
 
 <template>
     <SpinnerView v-if="spinner"/>
+
+    <div class="col-8 d-flex flex-wrap mt-3 px-3">
+        <div class="row input-group" style="display:inline-flex; width:auto;">
+            <div class="card text-center" style="width: 40rem;">
+                <div class="card-body">
+                    <table style="width:50%">
+                        <tr>
+                            <th style="text-align: start">Project name:</th>
+                            <td>Data 1</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: start">Number of groups:</th>
+                            <td>Data 2</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: start">Students per group:</th>
+                            <td>Data 3</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-8 d-flex flex-wrap mt-3 px-3">
         <div class="row input-group" style="display:inline-flex; width:auto;">
             <div class="card text-center" style="width: 40rem;">
@@ -91,7 +115,7 @@ listStudents();
                         <tbody v-for="student in state.students" :key="student.id">
                         <tr>
                             <td>{{ student.name }}</td>
-                            <td>{{ student.group_id }}</td>
+                            <td>Group #{{ student.group_id }}</td>
                             <td>
                                 <button type="button" class="btn btn-outline-danger btn-sm"
                                         @click="deleteStudent(student.id)">Delete
@@ -104,13 +128,13 @@ listStudents();
                             <td>
                                 <input v-model="name">
                             </td>
+                            <td></td>
                             <td>
                                 <button type="button" class="btn btn-outline-success btn-sm"
                                         @click="createStudent">
                                     Add Student
                                 </button>
                             </td>
-                            <td></td>
                         </tr>
                         </tfoot>
                     </table>
@@ -119,3 +143,6 @@ listStudents();
         </div>
     </div>
 </template>
+
+<style scoped>
+</style>
