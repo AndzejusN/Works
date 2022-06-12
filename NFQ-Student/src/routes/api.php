@@ -22,13 +22,9 @@ Route::prefix('/v1')->name('v1.')->group(function () {
         Route::get('/delete/{id}', [StudentController::class, 'destroy'])->name('destroy');
         Route::post('/create', [StudentController::class, 'create'])->name('create');
     });
-});
-
-Route::prefix('/v1')->name('v1.')->group(function () {
     Route::prefix('/projects')->name('projects.')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('list');
         Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('destroy');
         Route::post('/create', [ProjectController::class, 'create'])->name('create');
     });
 });
-
