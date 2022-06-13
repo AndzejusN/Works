@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use App\Models\Project;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -34,13 +37,19 @@ class ProjectController extends Controller
 
         $check = Project::create($validated);
 
+        if ($check) {
+            $response = ['positive' => 'Student information was successfully deleted'];
+        } else {
+            $response = ['negative' => 'Error, student information was not deleted'];
+        }
+
         return response()->json(compact('check'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +60,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -62,7 +71,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
@@ -73,8 +82,8 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
@@ -85,7 +94,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)

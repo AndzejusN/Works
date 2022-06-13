@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -10,21 +11,35 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        $query = Group::OrderBy('id');
+
+        $groups = $query->get();
+
+        return response()->json(compact('groups'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function create($request)
     {
-        //
+//        $number = $request->number;
+//
+//        $project_id = $request->id;
+//
+//        for ($i = 0; $i < $number; $i++) {
+//            Group::create($project_id);
+//        }
+
+        $check = 'Procedure was done';
+
+        return response()->json(compact('check'));
     }
 
     /**

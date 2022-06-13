@@ -129,9 +129,12 @@ listProjects();
                             <td>{{ project.groups }}</td>
                             <td>{{ project.students }}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary btn-sm"
-                                        @click="">Go to project
+
+                                <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'status', params: {id: project.id}}">
+                                <button type="button" class="btn btn-outline-primary btn-sm">
+                                    Go to project
                                 </button>
+                                </RouterLink>
                                 <button type="button" class="btn btn-outline-danger btn-sm"
                                         @click="deleteProject(project.id)">Delete
                                 </button>
