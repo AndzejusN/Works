@@ -61,11 +61,14 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Project $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Project $project)
+    public function show(Request $request)
     {
-        //
+
+        $project = Project::where('id', $request->id)->firstOrFail();
+
+        return response()->json(compact('project'));
     }
 
     /**

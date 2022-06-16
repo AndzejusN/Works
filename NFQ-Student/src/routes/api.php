@@ -25,6 +25,7 @@ Route::prefix('/v1')->name('v1.')->group(function () {
     });
     Route::prefix('/projects')->name('projects.')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('list');
+        Route::get('/project/{id?}', [ProjectController::class, 'show'])->name('one');
         Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('destroy');
         Route::post('/create', [ProjectController::class, 'create'])->name('create');
     });

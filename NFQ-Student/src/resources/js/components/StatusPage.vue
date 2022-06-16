@@ -10,6 +10,6 @@ export default {
 
 <template>
     <main class="py-3">
-        <RouterView/>
+        <router-view></router-view>
     </main>
 </template>
