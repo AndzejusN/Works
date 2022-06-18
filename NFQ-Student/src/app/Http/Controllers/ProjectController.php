@@ -76,7 +76,9 @@ class ProjectController extends Controller
 
         $project = Project::where('id', $request->id)->firstOrFail();
 
-        return response()->json(compact('project'));
+        $groups = Group::where('project_id', $request->id)->get();
+
+        return response()->json(compact('project', 'groups'));
     }
 
     /**

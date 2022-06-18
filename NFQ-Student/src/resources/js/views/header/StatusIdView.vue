@@ -85,7 +85,9 @@ listStudents();
 </script>
 
 <template>
+
     <SpinnerView v-if="spinner"/>
+
     <div class="col-8 d-flex flex-wrap mt-3 px-3">
         <div class="row input-group" style="display:inline-flex; width:auto;">
             <div class="card text-center" style="width: 40rem;">
@@ -154,9 +156,11 @@ listStudents();
 
     <div class="col-8 d-flex flex-wrap mt-3 px-3">
         <div class="row input-group" style="display:inline-flex; width:auto;">
-            <div class="card text-center" style="width: 40rem;">
+            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in state.project.groups" :key="group.id">
                 <div class="card-body">
-
+                    <div>
+                        {{ group.id }}
+                    </div>
                 </div>
             </div>
         </div>
