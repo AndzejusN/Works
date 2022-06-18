@@ -16,13 +16,16 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->unsignedBigInteger('group_id')->nullable()->default(1);
+            $table->unsignedBigInteger('group_id')->nullable()->default(null);
+            $table->unsignedBigInteger('project_id')->nullable()->default(null);
             $table->timestamps();
         });
 
         Schema::table('students', function (Blueprint $table) {
             $table->foreign('group_id')->references('id')
                 ->on('groups')->onDelete('restrict');
+            $table->foreign('project_id')->references('id')
+                ->on('projects')->onDelete('restrict');
         });
     }
 
