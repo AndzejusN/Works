@@ -23303,8 +23303,12 @@ __webpack_require__.r(__webpack_exports__);
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var id = route.params.id;
     var spinner = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
+    var errorMessage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
+    var confirmationMessage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
+    var name = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
-      project: []
+      project: [],
+      students: []
     });
 
     function initData(id) {
@@ -23319,13 +23323,73 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
+    function listStudents() {
+      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'http://localhost:8080/v1/students/';
+      spinner.value = true;
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        state.students = data.students;
+        spinner.value = false;
+      });
+    }
+
+    function createStudent() {
+      confirmationMessage.value = null;
+      errorMessage.value = null;
+      spinner.value = true;
+      var url = 'http://localhost:8080/v1/students/create';
+      var requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+          "name": name.value
+        })
+      };
+      fetch(url, requestOptions).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        confirmationMessage.value = data.confirmation;
+        errorMessage.value = data.error;
+        name.value = '';
+        listStudents();
+        spinner.value = false;
+      });
+    }
+
+    function deleteStudent(id) {
+      var _this = this;
+
+      var url = 'http://localhost:8080/v1/students/delete/';
+      url += id;
+      spinner.value = true;
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this.listStudents();
+
+        spinner.value = false;
+      });
+    }
+
     initData(id);
+    listStudents();
     var __returned__ = {
       route: route,
       id: id,
       spinner: spinner,
+      errorMessage: errorMessage,
+      confirmationMessage: confirmationMessage,
+      name: name,
       state: state,
       initData: initData,
+      listStudents: listStudents,
+      createStudent: createStudent,
+      deleteStudent: deleteStudent,
       SpinnerView: _components_partials_SpinnerComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_1__.reactive,
@@ -23357,12 +23421,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var __default__ = {
-  name: "status",
-  data: function data() {
-    return {
-      dialog: false
-    };
-  }
+  name: "status"
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/Object.assign(__default__, {
   setup: function setup(__props, _ref) {
@@ -23658,10 +23717,6 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Status page", -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_RouterLink = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("RouterLink");
 
@@ -23689,19 +23744,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RouterLink, {
-    "class": "me-3 py-2 text-dark text-decoration-none",
-    to: {
-      name: 'status'
-    }
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_6];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <RouterLink class=\"me-3 py-2 text-dark text-decoration-none\" :to=\"{name: 'statusid'}\"><h5>Status page</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </RouterLink>")])])]);
 }
 
 /***/ }),
@@ -24090,6 +24133,70 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_9 = {
+  "class": "col-8 d-flex flex-wrap mt-3 px-3"
+};
+var _hoisted_10 = {
+  "class": "row input-group",
+  style: {
+    "display": "inline-flex",
+    "width": "auto"
+  }
+};
+var _hoisted_11 = {
+  "class": "card text-center",
+  style: {
+    "width": "40rem"
+  }
+};
+var _hoisted_12 = {
+  "class": "card-body"
+};
+var _hoisted_13 = {
+  "class": "student-table"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  style: {
+    "min-width": "16rem"
+  }
+}, "Student full name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  style: {
+    "min-width": "10rem"
+  }
+}, "Group"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  style: {
+    "min-width": "10rem"
+  }
+}, "Action")])], -1
+/* HOISTED */
+);
+
+var _hoisted_15 = ["onClick"];
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-8 d-flex flex-wrap mt-3 px-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row input-group",
+  style: {
+    "display": "inline-flex",
+    "width": "auto"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card text-center",
+  style: {
+    "width": "40rem"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+})])])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$state$project, _$setup$state$project2, _$setup$state$project3, _$setup$state$project4, _$setup$state$project5, _$setup$state$project6, _$setup$state$project7, _$setup$state$project8, _$setup$state$project9;
 
@@ -24101,7 +24208,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$state$project7 = (_$setup$state$project8 = $setup.state.project) === null || _$setup$state$project8 === void 0 ? void 0 : (_$setup$state$project9 = _$setup$state$project8.project) === null || _$setup$state$project9 === void 0 ? void 0 : _$setup$state$project9.students) !== null && _$setup$state$project7 !== void 0 ? _$setup$state$project7 : null), 1
   /* TEXT */
-  )])])])])])])], 64
+  )])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_13, [_hoisted_14, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tbody", {
+      key: student.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "Group #" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.group_id), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      type: "button",
+      "class": "btn btn-outline-danger btn-sm",
+      onClick: function onClick($event) {
+        return $setup.deleteStudent(student.id);
+      }
+    }, "Delete ", 8
+    /* PROPS */
+    , _hoisted_15)])])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tfoot", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.name = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.name]])]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-outline-success btn-sm",
+    onClick: $setup.createStudent
+  }, " Add Student ")])])])])])])])]), _hoisted_17], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -24172,9 +24307,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$setup.spinner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["SpinnerView"], {
     key: 0
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$route.params.id), 1
-  /* TEXT */
-  ), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_6, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_6, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tbody", {
       key: student.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 1

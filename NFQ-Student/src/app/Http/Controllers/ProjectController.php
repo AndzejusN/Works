@@ -37,13 +37,21 @@ class ProjectController extends Controller
 
         $check = Project::create($validated);
 
-        if ($check) {
-            $response = ['positive' => 'Student information was successfully deleted'];
-        } else {
-            $response = ['negative' => 'Error, student information was not deleted'];
+        $groups = (int)$validated['groups'];
+
+        for (; $groups > 0; $groups--) {
+           Group::create([
+                'project_id' => $check->id
+            ]);
         }
 
-        return response()->json(compact('check'));
+        if ($check) {
+            $response = ['positive' => 'Project information was successfully created'];
+        } else {
+            $response = ['negative' => 'Error, project information was not created'];
+        }
+
+        return response()->json(compact('response'));
     }
 
     /**

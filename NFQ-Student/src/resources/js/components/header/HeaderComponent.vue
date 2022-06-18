@@ -7,8 +7,8 @@
             <nav class="d-inline-flex mt-2 mt-md-0 ms-auto">
                 <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'index'}"><h5>Project main</h5>
                 </RouterLink>
-                <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'status'}"><h5>Status page</h5>
-                </RouterLink>
+<!--                <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'statusid'}"><h5>Status page</h5>-->
+<!--                </RouterLink>-->
             </nav>
         </div>
     </header>

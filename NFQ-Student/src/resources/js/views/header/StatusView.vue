@@ -1,12 +1,7 @@
 <script>
 
 export default {
-    name: "status",
-    data() {
-        return {
-            dialog: false,
-        }
-    },
+    name: "status"
 }
 
 </script>
@@ -76,7 +71,6 @@ listStudents();
 
 <template>
     <SpinnerView v-if="spinner"/>
-<div>{{ $route.params.id }}</div>
     <div class="col-8 d-flex flex-wrap mt-3 px-3">
         <div class="row input-group" style="display:inline-flex; width:auto;">
             <div class="card text-center" style="width: 40rem;">
