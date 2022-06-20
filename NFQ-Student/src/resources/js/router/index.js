@@ -24,7 +24,8 @@ const router = createRouter({
         {
             path: '/status/:id',
             name: 'statusid',
-            component: StatusIdView
+            component: StatusIdView,
+            props: true
         },
         {
             path: '/company',

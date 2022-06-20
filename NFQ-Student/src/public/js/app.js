@@ -23302,6 +23302,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var id = route.params.id;
+    var studentsNumber = parseInt(route.params.students);
     var spinner = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
     var errorMessage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
     var confirmationMessage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
@@ -23381,6 +23382,7 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       route: route,
       id: id,
+      studentsNumber: studentsNumber,
       spinner: spinner,
       errorMessage: errorMessage,
       confirmationMessage: confirmationMessage,
@@ -24041,7 +24043,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       to: {
         name: 'statusid',
         params: {
-          id: project.id
+          id: project.id,
+          students: project.students
         }
       }
     }, {
@@ -24179,7 +24182,10 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_17 = {
-  "class": "col-8 d-flex flex-wrap mt-3 px-3"
+  "class": "col-8 d-flex flex-wrap mt-3 mb-5 px-3",
+  style: {
+    "height": "auto"
+  }
 };
 var _hoisted_18 = {
   "class": "row input-group",
@@ -24191,6 +24197,26 @@ var _hoisted_18 = {
 var _hoisted_19 = {
   "class": "card-body"
 };
+var _hoisted_20 = {
+  style: {
+    "width": "36rem"
+  }
+};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-label"
+}, "Select student:", -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  disabled: "disabled",
+  value: "null"
+}, "Select student by name", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$state$project, _$setup$state$project2, _$setup$state$project3, _$setup$state$project4, _$setup$state$project5, _$setup$state$project6, _$setup$state$project7, _$setup$state$project8, _$setup$state$project9;
 
@@ -24238,9 +24264,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "margin": "3px 0"
       },
       key: group.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(group.id), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " Group #" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(group.id), 1
     /* TEXT */
-    )])]);
+    ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.studentsNumber, function (one) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: one
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "class": "form-control",
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return _ctx.selectedStudent = $event;
+        })
+      }, [_hoisted_22, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+          key: student.id,
+          value: student.name
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 9
+        /* TEXT, PROPS */
+        , _hoisted_23);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))], 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.selectedStudent]])])]);
+    }), 128
+    /* KEYED_FRAGMENT */
+    ))])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])], 64
@@ -24454,7 +24502,8 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createRouter)({
   }, {
     path: '/status/:id',
     name: 'statusid',
-    component: _views_header_StatusIdView_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    component: _views_header_StatusIdView_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    props: true
   }, {
     path: '/company',
     name: 'company',

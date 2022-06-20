@@ -130,7 +130,7 @@ listProjects();
                             <td>{{ project.students }}</td>
                             <td>
 
-                                <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'statusid', params: {id: project.id}}">
+                                <RouterLink class="me-3 py-2 text-dark text-decoration-none" :to="{name: 'statusid', params: {id: project.id, students: project.students}}">
                                 <button type="button" class="btn btn-outline-primary btn-sm">
                                     Go to project
                                 </button>
