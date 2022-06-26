@@ -1,6 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import StatusView from '../views/header/StatusView.vue';
 import StatusIdView from '../views/header/StatusIdView.vue';
 import ProjectView from '../views/header/ProjectView.vue';
 
@@ -15,11 +14,6 @@ const router = createRouter({
             path: '/',
             name: 'index',
             component: ProjectView
-        },
-        {
-            path: '/status',
-            name: 'status',
-            component: StatusView
         },
         {
             path: '/status/:id',

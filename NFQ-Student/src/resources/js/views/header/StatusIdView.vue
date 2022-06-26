@@ -7,6 +7,7 @@ import {useRoute} from "vue-router";
 const route = useRoute();
 const id = route.params.id;
 let studentsNumber = parseInt(route.params.students);
+let groupsNumber = parseInt(route.params.groups);
 
 let spinner = ref(false);
 let errorMessage = ref(null);
@@ -157,22 +158,22 @@ listStudents();
 
     <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
         <div class="row input-group" style="display:inline-flex; width:auto;">
-            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in state.project.groups"
-                 :key="group.id">
+            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsNumber"
+                 :key="group">
                 <div class="card-body">
                     <div>
-                        Group #{{ group.id }}
+                        Group #{{ group }}
                     </div>
 
                     <div v-for="one in studentsNumber" :key="one">
                         <div style="width: 36rem;">
-                            <label class="form-label">Select student:</label>
+                            <label class="form-label">Select a student Nr. {{ one }}:</label>
                             <select class="form-control" v-model="selectedStudent">
-                                <option disabled="disabled" value="null">Select student by name</option>
+                                <option value="null" disabled="disabled">Select student by name</option>
                                 <option
                                     v-for="student in state.students"
                                     :key="student.id"
-                                    :value="student.name">
+                                    :value="student.id">
                                     {{ student.name }}
                                 </option>
                             </select>
