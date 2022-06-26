@@ -23310,7 +23310,12 @@ __webpack_require__.r(__webpack_exports__);
     var name = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       project: [],
-      students: []
+      students: [],
+      change: {
+        student_id: 0,
+        project_id: 0,
+        group_id: 0
+      }
     });
 
     function initData(id) {
@@ -23378,6 +23383,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
+    function selectedStudent() {
+      console.log(state.students.name);
+    }
+
     initData(id);
     listStudents();
     var __returned__ = {
@@ -23394,6 +23403,7 @@ __webpack_require__.r(__webpack_exports__);
       listStudents: listStudents,
       createStudent: createStudent,
       deleteStudent: deleteStudent,
+      selectedStudent: selectedStudent,
       SpinnerView: _components_partials_SpinnerComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_1__.reactive,
@@ -24093,23 +24103,33 @@ var _hoisted_18 = {
 var _hoisted_19 = {
   "class": "card-body"
 };
-var _hoisted_20 = {
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_21 = {
   style: {
     "width": "36rem"
   }
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "form-label"
 };
+var _hoisted_23 = {
+  "class": "form-control",
+  onchange: "selectedStudent()"
+};
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "null",
+  selected: "selected",
   disabled: "disabled"
 }, "Select student by name", -1
 /* HOISTED */
 );
 
-var _hoisted_23 = ["value"];
+var _hoisted_25 = ["onUpdate:modelValue"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$state$project, _$setup$state$project2, _$setup$state$project3, _$setup$state$project4, _$setup$state$project5, _$setup$state$project6, _$setup$state$project7, _$setup$state$project8, _$setup$state$project9;
 
@@ -24162,25 +24182,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.studentsNumber, function (one) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
         key: one
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_21, "Select a student Nr. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(one) + ":", 1
+      }, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_22, "Select a student Nr. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(one) + ":", 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-        "class": "form-control",
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.selectedStudent = $event;
-        })
-      }, [_hoisted_22, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_23, [_hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           key: student.id,
-          value: student.id
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return student.name = $event;
+          }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 9
         /* TEXT, PROPS */
-        , _hoisted_23);
+        , _hoisted_25);
       }), 128
       /* KEYED_FRAGMENT */
-      ))], 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.selectedStudent]])])]);
+      ))])])]);
     }), 128
     /* KEYED_FRAGMENT */
     ))])]);

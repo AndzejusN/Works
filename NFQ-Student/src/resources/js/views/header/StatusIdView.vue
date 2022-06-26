@@ -16,7 +16,12 @@ const name = ref('');
 
 const state = reactive({
     project: [],
-    students: []
+    students: [],
+    change: {
+        student_id: 0,
+        project_id: 0,
+        group_id: 0
+    }
 })
 
 function initData(id) {
@@ -78,6 +83,10 @@ function deleteStudent(id) {
         this.listStudents();
         spinner.value = false;
     });
+}
+
+function selectedStudent(){
+    console.log(state.students.name);
 }
 
 initData(id);
@@ -164,16 +173,16 @@ listStudents();
                     <div>
                         Group #{{ group }}
                     </div>
-
                     <div v-for="one in studentsNumber" :key="one">
+                        <br>
                         <div style="width: 36rem;">
                             <label class="form-label">Select a student Nr. {{ one }}:</label>
-                            <select class="form-control" v-model="selectedStudent">
-                                <option value="null" disabled="disabled">Select student by name</option>
+                            <select class="form-control" onchange="selectedStudent()">
+                                <option value="null" selected="selected" disabled="disabled">Select student by name</option>
                                 <option
                                     v-for="student in state.students"
                                     :key="student.id"
-                                    :value="student.id">
+                                    v-model="student.name">
                                     {{ student.name }}
                                 </option>
                             </select>
