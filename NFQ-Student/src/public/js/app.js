@@ -23383,8 +23383,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    function selectedStudent() {
-      console.log(state.students.name);
+    function selectedStudent(event) {
+      var result = event.target.value;
+      console.log(result);
     }
 
     initData(id);
@@ -24116,20 +24117,16 @@ var _hoisted_21 = {
 var _hoisted_22 = {
   "class": "form-label"
 };
-var _hoisted_23 = {
-  "class": "form-control",
-  onchange: "selectedStudent()"
-};
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "null",
   selected: "selected",
   disabled: "disabled"
-}, "Select student by name", -1
+}, "Select student by name ", -1
 /* HOISTED */
 );
 
-var _hoisted_25 = ["onUpdate:modelValue"];
+var _hoisted_24 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$state$project, _$setup$state$project2, _$setup$state$project3, _$setup$state$project4, _$setup$state$project5, _$setup$state$project6, _$setup$state$project7, _$setup$state$project8, _$setup$state$project9;
 
@@ -24184,18 +24181,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: one
       }, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_22, "Select a student Nr. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(one) + ":", 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_23, [_hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "class": "form-control",
+        onChange: _cache[1] || (_cache[1] = function ($event) {
+          return $setup.selectedStudent($event);
+        })
+      }, [_hoisted_23, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           key: student.id,
-          "onUpdate:modelValue": function onUpdateModelValue($event) {
-            return student.name = $event;
-          }
+          value: student.id
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 9
         /* TEXT, PROPS */
-        , _hoisted_25);
+        , _hoisted_24);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])])]);
+      ))], 32
+      /* HYDRATE_EVENTS */
+      )])]);
     }), 128
     /* KEYED_FRAGMENT */
     ))])]);

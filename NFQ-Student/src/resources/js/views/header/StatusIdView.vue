@@ -6,8 +6,8 @@ import {useRoute} from "vue-router";
 
 const route = useRoute();
 const id = route.params.id;
-let studentsNumber = parseInt(route.params.students);
-let groupsNumber = parseInt(route.params.groups);
+const studentsNumber = parseInt(route.params.students);
+const groupsNumber = parseInt(route.params.groups);
 
 let spinner = ref(false);
 let errorMessage = ref(null);
@@ -85,8 +85,9 @@ function deleteStudent(id) {
     });
 }
 
-function selectedStudent(){
-    console.log(state.students.name);
+function selectedStudent(event) {
+    let result = event.target.value;
+    console.log(result);
 }
 
 initData(id);
@@ -177,12 +178,13 @@ listStudents();
                         <br>
                         <div style="width: 36rem;">
                             <label class="form-label">Select a student Nr. {{ one }}:</label>
-                            <select class="form-control" onchange="selectedStudent()">
-                                <option value="null" selected="selected" disabled="disabled">Select student by name</option>
+                            <select class="form-control" @change="selectedStudent($event)">
+                                <option value="null" selected="selected" disabled="disabled">Select student by name
+                                </option>
                                 <option
                                     v-for="student in state.students"
                                     :key="student.id"
-                                    v-model="student.name">
+                                    :value="student.id">
                                     {{ student.name }}
                                 </option>
                             </select>
