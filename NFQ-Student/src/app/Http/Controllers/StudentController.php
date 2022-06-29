@@ -47,6 +47,18 @@ class StudentController extends Controller
     {
         //
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function modify(Request $request)
+    {
+        $info = $request->all();
+
+        return response()->json(compact('info'));
+    }
 
     /**
      * Display the specified resource.

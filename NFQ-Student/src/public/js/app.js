@@ -23310,12 +23310,7 @@ __webpack_require__.r(__webpack_exports__);
     var name = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)('');
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       project: [],
-      students: [],
-      change: {
-        student_id: 0,
-        project_id: 0,
-        group_id: 0
-      }
+      students: []
     });
 
     function initData(id) {
@@ -23383,9 +23378,31 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    function selectedStudent(event) {
-      var result = event.target.value;
-      console.log(result);
+    function dataStudent(event) {
+      var projectId = event.target.value[4];
+      var groupNr = event.target.value[2];
+      var studentId = event.target.value[0];
+      spinner.value = true;
+      var url = 'http://localhost:8080/v1/students/modify';
+      var requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+          "student_id": studentId,
+          "group_nr": groupNr,
+          "project_id": projectId
+        })
+      };
+      fetch(url, requestOptions).then(function (response) {
+        return response.json();
+      }).then(function () {
+        listStudents();
+        spinner.value = false;
+      });
     }
 
     initData(id);
@@ -23404,7 +23421,7 @@ __webpack_require__.r(__webpack_exports__);
       listStudents: listStudents,
       createStudent: createStudent,
       deleteStudent: deleteStudent,
-      selectedStudent: selectedStudent,
+      dataStudent: dataStudent,
       SpinnerView: _components_partials_SpinnerComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_1__.reactive,
@@ -24173,7 +24190,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "width": "40rem",
         "margin": "3px 0"
       },
-      key: group
+      key: group.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " Group #" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(group), 1
     /* TEXT */
     ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.studentsNumber, function (one) {
@@ -24184,12 +24201,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form-control",
         onChange: _cache[1] || (_cache[1] = function ($event) {
-          return $setup.selectedStudent($event);
+          return $setup.dataStudent($event);
         })
       }, [_hoisted_23, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.state.students, function (student) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           key: student.id,
-          value: student.id
+          value: [student.id, group, $setup.id]
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name), 9
         /* TEXT, PROPS */
         , _hoisted_24);

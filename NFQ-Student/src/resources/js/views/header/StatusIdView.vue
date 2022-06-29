@@ -16,12 +16,7 @@ const name = ref('');
 
 const state = reactive({
     project: [],
-    students: [],
-    change: {
-        student_id: 0,
-        project_id: 0,
-        group_id: 0
-    }
+    students: []
 })
 
 function initData(id) {
@@ -80,14 +75,35 @@ function deleteStudent(id) {
     url += id;
     spinner.value = true;
     fetch(url).then(response => response.json()).then(data => {
-        this.listStudents();
+        this.listStudents()
         spinner.value = false;
     });
 }
 
-function selectedStudent(event) {
-    let result = event.target.value;
-    console.log(result);
+function dataStudent(event) {
+    let projectId = event.target.value[4];
+    let groupNr = event.target.value[2];
+    let studentId = event.target.value[0];
+
+    spinner.value = true;
+    let url = 'http://localhost:8080/v1/students/modify';
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({"student_id": studentId, "group_nr": groupNr, "project_id": projectId})
+    };
+
+    fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(() => {
+            listStudents();
+            spinner.value = false;
+        });
+
 }
 
 initData(id);
@@ -169,7 +185,7 @@ listStudents();
     <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
         <div class="row input-group" style="display:inline-flex; width:auto;">
             <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsNumber"
-                 :key="group">
+                 :key="group.id">
                 <div class="card-body">
                     <div>
                         Group #{{ group }}
@@ -178,13 +194,13 @@ listStudents();
                         <br>
                         <div style="width: 36rem;">
                             <label class="form-label">Select a student Nr. {{ one }}:</label>
-                            <select class="form-control" @change="selectedStudent($event)">
+                            <select class="form-control" @change="dataStudent($event)">
                                 <option value="null" selected="selected" disabled="disabled">Select student by name
                                 </option>
                                 <option
                                     v-for="student in state.students"
                                     :key="student.id"
-                                    :value="student.id">
+                                    :value="[student.id,group,id]">
                                     {{ student.name }}
                                 </option>
                             </select>
