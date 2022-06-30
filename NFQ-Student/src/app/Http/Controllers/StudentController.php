@@ -47,6 +47,7 @@ class StudentController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,6 +57,11 @@ class StudentController extends Controller
     public function modify(Request $request)
     {
         $info = $request->all();
+
+        Student::where('id', $request->student_id)->update([
+            'group_id' => $request->group_nr,
+            'project_id' => $request->project_id
+        ]);
 
         return response()->json(compact('info'));
     }
