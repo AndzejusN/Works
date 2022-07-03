@@ -18,7 +18,8 @@ class Group extends Model
 
     public function project_id(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Project::class, 'project_id', 'id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
+
 
 }

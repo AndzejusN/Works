@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
+use App\Http\Resources\StudentResource;
+use App\Http\Resources\StudentResourceCollection;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -21,6 +23,19 @@ class StudentController extends Controller
 
         return response()->json(compact('students'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return StudentResourceCollection
+     */
+    public function index_v2()
+    {
+        $students = Student::get();
+
+        return new StudentResourceCollection($students);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -58,12 +73,13 @@ class StudentController extends Controller
     {
         $info = $request->all();
 
-        Student::where('id', $request->student_id)->update([
-            'group_id' => $request->group_nr,
-            'project_id' => $request->project_id
-        ]);
+        $check = Student::where('id', $request->student_id)
+            ->update([
+                'group_id' => $request->group_id,
+                'project_id' => $request->project_id
+            ]);
 
-        return response()->json(compact('info'));
+        return response()->json(compact('info', 'check'));
     }
 
     /**

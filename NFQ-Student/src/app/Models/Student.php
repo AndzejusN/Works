@@ -19,11 +19,11 @@ class Student extends Model
 
     public function group_id(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Group::class, 'group_id', 'id');
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
     public function project_id(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Project::class, 'project_id', 'id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

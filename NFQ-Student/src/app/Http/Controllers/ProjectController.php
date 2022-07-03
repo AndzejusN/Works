@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use App\Http\Resources\ProjectResource;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Models\Project;
@@ -24,6 +26,17 @@ class ProjectController extends Controller
 
         return response()->json(compact('projects'));
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index_v2()
+    {
+
+        return ProjectResource::collection(Project::all());
     }
 
     /**

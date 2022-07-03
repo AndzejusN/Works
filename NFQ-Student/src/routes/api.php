@@ -36,3 +36,15 @@ Route::prefix('/v1')->name('v1.')->group(function () {
         Route::post('/create', [GroupController::class, 'create'])->name('create');
     });
 });
+
+Route::prefix('/v2')->name('v2.')->group(function () {
+    Route::prefix('/students')->name('students.')->group(function () {
+        Route::get('/', [StudentController::class, 'index_v2'])->name('list_v2');
+    });
+    Route::prefix('/projects')->name('projects.')->group(function () {
+        Route::get('/', [ProjectController::class, 'index_v2'])->name('list_v2');
+    });
+    Route::prefix('/groups')->name('groups.')->group(function () {
+        Route::get('/', [GroupController::class, 'index_v2'])->name('list_v2');
+    });
+});

@@ -5,9 +5,9 @@ import {ref, reactive} from "vue";
 import {useRoute} from "vue-router";
 
 const route = useRoute();
-const id = route.params.id;
-const studentsNumber = parseInt(route.params.students);
-const groupsNumber = parseInt(route.params.groups);
+const projectId = parseInt(route.params.id);
+const groupsPerProject = parseInt(route.params.groups);
+const studentsPerGroup = parseInt(route.params.students);
 
 let spinner = ref(false);
 let errorMessage = ref(null);
@@ -16,13 +16,14 @@ const name = ref('');
 
 const state = reactive({
     project: [],
-    students: []
+    students: [],
+    studentMod: []
 })
 
-function initData(id) {
+function initData(projectId) {
 
     let url = 'http://localhost:8080/v1/projects/project/';
-    url += id;
+    url += projectId;
 
     spinner.value = true;
     fetch(url)
@@ -80,10 +81,10 @@ function deleteStudent(id) {
     });
 }
 
-function dataStudent(event) {
-    let projectId = event.target.value[4];
-    let groupNr = event.target.value[2];
-    let studentId = event.target.value[0];
+function dataStudent(group, student) {
+    let studentId =  state.students[state.studentMod[group][student]].id;
+    let groupId =  state.students[state.studentMod[group][student]].group_id;
+    let projectId =  state.students[state.studentMod[group][student]].project_id;
 
     spinner.value = true;
     let url = 'http://localhost:8080/v1/students/modify';
@@ -94,7 +95,7 @@ function dataStudent(event) {
             "X-Requested-With": "XMLHttpRequest",
             "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify({"student_id": studentId, "group_nr": groupNr, "project_id": projectId})
+        body: JSON.stringify({"student_id": studentId, "group_id": groupId, "project_id": projectId})
     };
 
     fetch(url, requestOptions)
@@ -106,7 +107,7 @@ function dataStudent(event) {
 
 }
 
-initData(id);
+initData(projectId);
 
 listStudents();
 
@@ -184,23 +185,22 @@ listStudents();
 
     <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
         <div class="row input-group" style="display:inline-flex; width:auto;">
-            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsNumber"
+            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"
                  :key="group.id">
                 <div class="card-body">
                     <div>
                         Group #{{ group }}
                     </div>
-                    <div v-for="one in studentsNumber" :key="one">
+                    <div v-for="student in studentsPerGroup" :key="student">
                         <br>
                         <div style="width: 36rem;">
-                            <label class="form-label">Select a student Nr. {{ one }}:</label>
-                            <select class="form-control" @change="dataStudent($event)">
+                            <label class="form-label">Select a student Nr. {{ student }}:</label>
+                            <select v-model="state.studentMod[group][student]" class="form-control" @change="dataStudent(group, student)">
                                 <option value="null" selected="selected" disabled="disabled">Select student by name
                                 </option>
                                 <option
-                                    v-for="student in state.students"
-                                    :key="student.id"
-                                    :value="[student.id,group,id]">
+                                    v-for="(student, index) in state.students"
+                                    :value="index">
                                     {{ student.name }}
                                 </option>
                             </select>
