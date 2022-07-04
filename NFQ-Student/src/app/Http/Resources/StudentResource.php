@@ -18,12 +18,11 @@ class StudentResource extends JsonResource
     {
 
         $group = Group::find($this->group_id);
-        $project = Project::find($this->project_id);
 
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'group' => new GroupResource($group),
-            'project' => new ProjectResource($project)
         ];
     }
 }

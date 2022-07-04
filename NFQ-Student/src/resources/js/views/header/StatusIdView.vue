@@ -183,33 +183,33 @@ listStudents();
         </div>
     </div>
 
-    <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
-        <div class="row input-group" style="display:inline-flex; width:auto;">
-            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"
-                 :key="group.id">
-                <div class="card-body">
-                    <div>
-                        Group #{{ group }}
-                    </div>
-                    <div v-for="student in studentsPerGroup" :key="student">
-                        <br>
-                        <div style="width: 36rem;">
-                            <label class="form-label">Select a student Nr. {{ student }}:</label>
-                            <select v-model="state.studentMod[group][student]" class="form-control" @change="dataStudent(group, student)">
-                                <option value="null" selected="selected" disabled="disabled">Select student by name
-                                </option>
-                                <option
-                                    v-for="(student, index) in state.students"
-                                    :value="index">
-                                    {{ student.name }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">-->
+<!--        <div class="row input-group" style="display:inline-flex; width:auto;">-->
+<!--            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"-->
+<!--                 :key="group.id">-->
+<!--                <div class="card-body">-->
+<!--                    <div>-->
+<!--                        Group #{{ group }}-->
+<!--                    </div>-->
+<!--                    <div v-for="student in studentsPerGroup" :key="student">-->
+<!--                        <br>-->
+<!--                        <div style="width: 36rem;">-->
+<!--                            <label class="form-label">Select a student Nr. {{ student }}:</label>-->
+<!--                            <select v-model="state.studentMod[group][student]" class="form-control" @change="dataStudent(group, student)">-->
+<!--                                <option value="null" selected="selected" disabled="disabled">Select student by name-->
+<!--                                </option>-->
+<!--                                <option-->
+<!--                                    v-for="(student, index) in state.students"-->
+<!--                                    :value="index">-->
+<!--                                    {{ student.name }}-->
+<!--                                </option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <style scoped>

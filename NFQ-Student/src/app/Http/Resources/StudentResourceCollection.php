@@ -2,10 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Group;
+use App\Models\Project;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\ProjectResource;
 
 class StudentResourceCollection extends ResourceCollection
 {
+
     /**
      * Transform the resource collection into an array.
      *
@@ -14,6 +18,14 @@ class StudentResourceCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $group = Group::find($this->group);
+//        $project = Project::find($this->group->project_id);
+
+        return [
+            'data' => $this->collection,
+//            'group' => new GroupResource($group),
+            'group' => GroupResource::collection($group),
+//            'projects' => new ProjectResource($project)
+        ];
     }
 }
