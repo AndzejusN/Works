@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\GroupResource;
+use App\Http\Resources\GroupResourceCollection;
+use App\Http\Resources\ProjectResourceCollection;
 use App\Models\Group;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -26,14 +28,13 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return GroupResourceCollection
      */
     public function index_v2()
     {
-        $groups = Group::with(['project_id']);
+        $groups = Group::with(['project_id'])->get();
 
-        return GroupResource::collection($groups->paginate(10))->response();
-
+        return new GroupResourceCollection($groups);
     }
 
 

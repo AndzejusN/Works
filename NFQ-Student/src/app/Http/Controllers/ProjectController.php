@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ProjectResourceCollection;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
@@ -31,12 +32,13 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return ProjectResourceCollection
      */
     public function index_v2()
     {
+        $projects = Project::get();
 
-        return ProjectResource::collection(Project::all());
+        return new ProjectResourceCollection($projects);
     }
 
     /**

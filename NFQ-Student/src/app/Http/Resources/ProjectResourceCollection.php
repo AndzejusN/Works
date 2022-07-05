@@ -2,14 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Group;
-use App\Models\Project;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use App\Http\Resources\ProjectResource;
 
-class StudentResourceCollection extends ResourceCollection
+class ProjectResourceCollection extends ResourceCollection
 {
-
     /**
      * Transform the resource collection into an array.
      *
@@ -18,9 +14,8 @@ class StudentResourceCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-
         return [
-            'students' => $this->collection,
+            'projects' => $this->collection,
         ];
     }
 }
