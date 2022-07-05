@@ -18,15 +18,9 @@ class StudentResourceCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        $group = Group::find($this->group);
-
-//        $project = Project::find($this->group->project_id);
 
         return [
             'data' => $this->collection,
-//            'group' => new GroupResource($group),
-            'group' => GroupResource::collection($group),
-//            'projects' => new ProjectResource($project)
         ];
     }
 }
