@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Models\Group;
-use App\Models\Project;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource

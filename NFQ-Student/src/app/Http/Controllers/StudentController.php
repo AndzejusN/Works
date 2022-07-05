@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
-use App\Http\Resources\StudentResource;
 use App\Http\Resources\StudentResourceCollection;
 use App\Models\Student;
 use Illuminate\Http\Request;

@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\GroupResource;
 use App\Http\Resources\GroupResourceCollection;
-use App\Http\Resources\ProjectResourceCollection;
 use App\Models\Group;
-use App\Models\Project;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -45,6 +42,8 @@ class GroupController extends Controller
      */
     public function create($request)
     {
+
+        // TODO
 //        $number = $request->number;
 //
 //        $project_id = $request->id;

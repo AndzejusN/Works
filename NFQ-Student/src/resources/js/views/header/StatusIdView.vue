@@ -182,7 +182,7 @@ listStudents();
             </div>
         </div>
     </div>
-
+<!--TODO-->
 <!--    <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">-->
 <!--        <div class="row input-group" style="display:inline-flex; width:auto;">-->
 <!--            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"-->
@@ -210,6 +210,7 @@ listStudents();
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
+<!--    TODO-->
 </template>
 
 <style scoped>
