@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\StudentController;
-use \App\Http\Controllers\ProjectController;
-use \App\Http\Controllers\GroupController;
+use \App\Http\Controllers;
+use \App\Http\Controllers\Api\V2;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,32 +19,32 @@ use \App\Http\Controllers\GroupController;
 
 Route::prefix('/v1')->name('v1.')->group(function () {
     Route::prefix('/students')->name('students.')->group(function () {
-        Route::get('/', [StudentController::class, 'index'])->name('list');
-        Route::get('/delete/{id}', [StudentController::class, 'destroy'])->name('destroy');
-        Route::post('/create', [StudentController::class, 'create'])->name('create');
-        Route::post('/modify', [StudentController::class, 'modify'])->name('modify');
+        Route::get('/', [Controllers\StudentController::class, 'index'])->name('list');
+        Route::get('/delete/{id}', [Controllers\StudentController::class, 'destroy'])->name('destroy');
+        Route::post('/create', [Controllers\StudentController::class, 'create'])->name('create');
+        Route::post('/modify', [Controllers\StudentController::class, 'modify'])->name('modify');
     });
     Route::prefix('/projects')->name('projects.')->group(function () {
-        Route::get('/', [ProjectController::class, 'index'])->name('list');
-        Route::get('/project/{id?}', [ProjectController::class, 'show'])->name('one');
-        Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('destroy');
-        Route::post('/create', [ProjectController::class, 'create'])->name('create');
+        Route::get('/', [Controllers\ProjectController::class, 'index'])->name('list');
+        Route::get('/project/{id?}', [Controllers\ProjectController::class, 'show'])->name('one');
+        Route::get('/delete/{id}', [Controllers\ProjectController::class, 'destroy'])->name('destroy');
+        Route::post('/create', [Controllers\ProjectController::class, 'create'])->name('create');
     });
     Route::prefix('/groups')->name('groups.')->group(function () {
-        Route::get('/', [GroupController::class, 'index'])->name('list');
-        Route::get('/delete/{id}', [GroupController::class, 'destroy'])->name('destroy');
-        Route::post('/create', [GroupController::class, 'create'])->name('create');
+        Route::get('/', [Controllers\GroupController::class, 'index'])->name('list');
+        Route::get('/delete/{id}', [Controllers\GroupController::class, 'destroy'])->name('destroy');
+        Route::post('/create', [Controllers\GroupController::class, 'create'])->name('create');
     });
 });
 
 Route::prefix('/v2')->name('v2.')->group(function () {
     Route::prefix('/students')->name('students.')->group(function () {
-        Route::get('/', [StudentController::class, 'index_v2'])->name('list_v2');
+        Route::get('/', [V2\StudentController::class, 'index'])->name('list');
     });
     Route::prefix('/projects')->name('projects.')->group(function () {
-        Route::get('/', [ProjectController::class, 'index_v2'])->name('list_v2');
+        Route::get('/', [V2\ProjectController::class, 'index'])->name('list');
     });
     Route::prefix('/groups')->name('groups.')->group(function () {
-        Route::get('/', [GroupController::class, 'index_v2'])->name('list_v2');
+        Route::get('/', [V2\GroupController::class, 'index'])->name('list');
     });
 });

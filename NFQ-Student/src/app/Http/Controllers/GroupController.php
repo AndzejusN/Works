@@ -23,19 +23,6 @@ class GroupController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return GroupResourceCollection
-     */
-    public function index_v2()
-    {
-        $groups = Group::with(['project_id'])->get();
-
-        return new GroupResourceCollection($groups);
-    }
-
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\JsonResponse

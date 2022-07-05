@@ -30,18 +30,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return ProjectResourceCollection
-     */
-    public function index_v2()
-    {
-        $projects = Project::get();
-
-        return new ProjectResourceCollection($projects);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\JsonResponse

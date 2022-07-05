@@ -24,19 +24,6 @@ class StudentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return StudentResourceCollection
-     */
-    public function index_v2()
-    {
-        $students = Student::get();
-
-        return new StudentResourceCollection($students);
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
