@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\V2;
 
+use App\Models\Project;
+use App\Http\Resources\V2;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class GroupCollection extends ResourceCollection
@@ -14,8 +16,9 @@ class GroupCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+
         return [
-            'groups' => $this->collection,
+            'groups' => $this->collection
         ];
     }
 }

@@ -16,9 +16,15 @@ const name = ref('');
 
 const state = reactive({
     project: [],
-    students: [],
-    studentMod: []
+    data: []
 })
+
+async function allData() {
+    let url = 'http://localhost:8080/v2/students';
+
+    let response = await axios.get(url);
+    state.data = response.data.data;
+}
 
 function initData(projectId) {
 
@@ -32,15 +38,6 @@ function initData(projectId) {
             state.project = data;
             spinner.value = false;
         })
-}
-
-
-function listStudents(url = 'http://localhost:8080/v1/students/') {
-    spinner.value = true;
-    fetch(url).then(response => response.json()).then(data => {
-        state.students = data.students;
-        spinner.value = false;
-    });
 }
 
 function createStudent() {
@@ -64,9 +61,8 @@ function createStudent() {
         .then(data => {
             confirmationMessage.value = data.confirmation;
             errorMessage.value = data.error;
-
+            allData();
             name.value = '';
-            listStudents();
             spinner.value = false;
         });
 }
@@ -76,15 +72,15 @@ function deleteStudent(id) {
     url += id;
     spinner.value = true;
     fetch(url).then(response => response.json()).then(data => {
-        this.listStudents()
+        allData();
         spinner.value = false;
     });
 }
 
 function dataStudent(group, student) {
-    let studentId =  state.students[state.studentMod[group][student]].id;
-    let groupId =  state.students[state.studentMod[group][student]].group_id;
-    let projectId =  state.students[state.studentMod[group][student]].project_id;
+    let studentId = state.data.students[student.id];
+    let groupId = state.data.students.group.id;
+    let projectId = state.data.students.group.project.id;
 
     spinner.value = true;
     let url = 'http://localhost:8080/v1/students/modify';
@@ -101,15 +97,13 @@ function dataStudent(group, student) {
     fetch(url, requestOptions)
         .then(response => response.json())
         .then(() => {
-            listStudents();
             spinner.value = false;
         });
 
 }
 
 initData(projectId);
-
-listStudents();
+allData();
 
 </script>
 
@@ -152,7 +146,7 @@ listStudents();
                             <th style="min-width: 10rem">Action</th>
                         </tr>
                         </thead>
-                        <tbody v-for="student in state.students" :key="student.id">
+                        <tbody v-for="student in state.data.students" :key="student.id">
                         <tr>
                             <td>{{ student.name }}</td>
                             <td>Group #{{ student.group_id }}</td>
@@ -182,35 +176,35 @@ listStudents();
             </div>
         </div>
     </div>
-<!--TODO-->
-<!--    <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">-->
-<!--        <div class="row input-group" style="display:inline-flex; width:auto;">-->
-<!--            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"-->
-<!--                 :key="group.id">-->
-<!--                <div class="card-body">-->
-<!--                    <div>-->
-<!--                        Group #{{ group }}-->
-<!--                    </div>-->
-<!--                    <div v-for="student in studentsPerGroup" :key="student">-->
-<!--                        <br>-->
-<!--                        <div style="width: 36rem;">-->
-<!--                            <label class="form-label">Select a student Nr. {{ student }}:</label>-->
-<!--                            <select v-model="state.studentMod[group][student]" class="form-control" @change="dataStudent(group, student)">-->
-<!--                                <option value="null" selected="selected" disabled="disabled">Select student by name-->
-<!--                                </option>-->
-<!--                                <option-->
-<!--                                    v-for="(student, index) in state.students"-->
-<!--                                    :value="index">-->
-<!--                                    {{ student.name }}-->
-<!--                                </option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    TODO-->
+        <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
+            <div class="row input-group" style="display:inline-flex; width:auto;">
+                <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"
+                     :key="group.id">
+                    <div class="card-body">
+                        <div>
+                            Group #{{ group }}
+                        </div>
+                        <div v-for="student in studentsPerGroup" :key="student">
+                            <br>
+                            <div style="width: 36rem;">
+                                <label class="form-label">Select a student Nr. {{ student }}:</label>
+                                <select v-model="state.data" class="form-control"
+                                        @change="dataStudent(group, student)">
+                                    <option value="null" selected="selected" disabled="disabled">Select student by name
+                                    </option>
+                                    <option
+                                        v-for="(student, index) in state.data.students"
+                                        :value="index">
+                                        {{ student.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </template>
 
 <style scoped>
