@@ -35,7 +35,7 @@ function initData(projectId) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            state.project = data;
+            state.project = data.project;
             spinner.value = false;
         })
 }
@@ -118,15 +118,15 @@ allData();
                     <table style="width:50%">
                         <tr>
                             <th style="text-align: start">Project name:</th>
-                            <td>{{ state.project?.project?.name ?? null }}</td>
+                            <td>{{ state.project?.name ?? null }}</td>
                         </tr>
                         <tr>
                             <th style="text-align: start">Number of groups:</th>
-                            <td>{{ state.project?.project?.groups ?? null }}</td>
+                            <td>{{ state.project?.groups ?? null }}</td>
                         </tr>
                         <tr>
                             <th style="text-align: start">Students per group:</th>
-                            <td>{{ state.project?.project?.students ?? null }}</td>
+                            <td>{{ state.project?.students ?? null }}</td>
                         </tr>
                     </table>
                 </div>
@@ -149,7 +149,7 @@ allData();
                         <tbody v-for="student in state.data.students" :key="student.id">
                         <tr>
                             <td>{{ student.name }}</td>
-                            <td>Group #{{ student.group_id }}</td>
+                            <td>Group #{{ student.group }}</td>
                             <td>
                                 <button type="button" class="btn btn-outline-danger btn-sm"
                                         @click="deleteStudent(student.id)">Delete
@@ -176,35 +176,34 @@ allData();
             </div>
         </div>
     </div>
-        <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">
-            <div class="row input-group" style="display:inline-flex; width:auto;">
-                <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"
-                     :key="group.id">
-                    <div class="card-body">
-                        <div>
-                            Group #{{ group }}
-                        </div>
-                        <div v-for="student in studentsPerGroup" :key="student">
-                            <br>
-                            <div style="width: 36rem;">
-                                <label class="form-label">Select a student Nr. {{ student }}:</label>
-                                <select v-model="state.data" class="form-control"
-                                        @change="dataStudent(group, student)">
-                                    <option value="null" selected="selected" disabled="disabled">Select student by name
-                                    </option>
-                                    <option
-                                        v-for="(student, index) in state.data.students"
-                                        :value="index">
-                                        {{ student.name }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<!--    <div class="col-8 d-flex flex-wrap mt-3 mb-5 px-3" style="height: auto">-->
+<!--        <div class="row input-group" style="display:inline-flex; width:auto;">-->
+<!--            <div class="card text-center" style="width: 40rem; margin: 3px 0" v-for="group in groupsPerProject"-->
+<!--                 :key="group.id">-->
+<!--                <div class="card-body">-->
+<!--                    <div>-->
+<!--                        Group #{{ group }}-->
+<!--                    </div>-->
+<!--                    <div v-for="student in studentsPerGroup" :key="student">-->
+<!--                        <br>-->
+<!--                        <div style="width: 36rem;">-->
+<!--                            <label class="form-label">Select a student Nr. {{ student }}:</label>-->
+<!--                            <select v-model="state.data" class="form-control"-->
+<!--                                    @change="dataStudent(group, student)">-->
+<!--                                <option value="null" selected="selected" disabled="disabled">Select student by name-->
+<!--                                </option>-->
+<!--                                <option-->
+<!--                                    v-for="(student, index) in state.data.students"-->
+<!--                                    :value="index">-->
+<!--                                    {{ student.name }}-->
+<!--                                </option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <style scoped>
