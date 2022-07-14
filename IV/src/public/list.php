@@ -1,6 +1,6 @@
 <?php
 
-require_once ('read.php');
+require_once('php/read.php');
 
 ?>
 
@@ -32,31 +32,39 @@ require_once ('read.php');
 
 <main class="py-3 px-5">
 
+    <div class="card text-center">
+        <div class="card-header text-muted">
+            <h3>
+                Orders list:
+            </h3>
+        </div>
+    </div>
+
 	<?php
 	if (isset($orders)){
 	$count = 0;
 	foreach ($orders as $order) {
 		$count++;
 		?>
-    <form action="delete.php" method="post" class="py-1">
-        <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']) ?>">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Name: <?php echo htmlspecialchars($order['name']) ?></h5>
-                <p class="card-text">Id: <?php echo htmlspecialchars($order['id']) ?></p>
-                <p class="card-text">Slug: <?php echo htmlspecialchars($order['slug']) ?></p>
-                <button type="submit" class="btn btn-outline-danger">Delete</button>
+        <form action="php/delete.php" method="post" class="py-1">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']) ?>">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Name: <?php echo htmlspecialchars($order['name']) ?></h5>
+                    <p class="card-text">Id: <?php echo htmlspecialchars($order['id']) ?></p>
+                    <p class="card-text">Slug: <?php echo htmlspecialchars($order['slug']) ?></p>
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </div>
+                <div class="card-footer text-muted">
+                    IV solutions
+                </div>
             </div>
-            <div class="card-footer text-muted">
-                IV solutions
-            </div>
-        </div>
-    </form>
+        </form>
 	<?php } ?>
 </main>
 
 <footer class="py-3 px-5">
-    <div class="d-flex flex-column flex-fill align-items-center justify-content-center pb-3 mb-4 border-top">
+    <div class="d-flex flex-column flex-fill align-items-end justify-content-center pb-3 mb-4 border-top">
         <div class="card text-center alert alert-dark">
             <h5><b> Totally placed orders: <?php echo $count;
 					} else {

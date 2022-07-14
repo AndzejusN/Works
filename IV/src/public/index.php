@@ -28,22 +28,29 @@ require_once('main.php');
 </header>
 
 <main class="py-3 px-5">
+    <div class="card text-center">
+        <div class="card-header text-muted">
+            <h3>
+                List of servers to rent:
+            </h3>
+        </div>
+    </div>
 
 	<?php
 	if (isset($dataDecoded)) {
-		foreach ($dataDecoded['categories'] as $keyArr) {
-            ?>
-            <form action="add.php" method="post" class="py-1">
-                <input type="hidden" name="name" value="<?php echo htmlspecialchars($keyArr['name']) ?>">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($keyArr['id']) ?>">
-                <input type="hidden" name="slug" value="<?php echo htmlspecialchars($keyArr['slug']) ?>">
+		foreach ($dataDecoded['categories'] as $data) {
+			?>
+            <form action="php/add.php" method="post" class="py-1">
+                <input type="hidden" name="name" value="<?php echo htmlspecialchars($data['name']) ?>">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($data['id']) ?>">
+                <input type="hidden" name="slug" value="<?php echo htmlspecialchars($data['slug']) ?>">
 
                 <div class="card text-center">
 
                     <div class="card-body">
-                        <h5 class="card-title">Name: <?php echo htmlspecialchars($keyArr['name']) ?></h5>
-                        <p class="card-text">Id: <?php echo htmlspecialchars($keyArr['id']) ?></p>
-                        <p class="card-text">Slug: <?php echo htmlspecialchars($keyArr['slug']) ?></p>
+                        <h5 class="card-title">Name: <?php echo htmlspecialchars($data['name']) ?></h5>
+                        <p class="card-text">Id: <?php echo htmlspecialchars($data['id']) ?></p>
+                        <p class="card-text">Slug: <?php echo htmlspecialchars($data['slug']) ?></p>
                         <button type="submit" class="btn btn-outline-primary">Place an order</button>
                     </div>
                     <div class="card-footer text-muted">
@@ -51,7 +58,7 @@ require_once('main.php');
                     </div>
                 </div>
             </form>
-        <?php }
+		<?php }
 	} ?>
 </main>
 
