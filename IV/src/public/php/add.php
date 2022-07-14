@@ -4,7 +4,7 @@ $id = $_POST['id'] ?? NULL;
 $name = $_POST['name'] ?? NULL;
 $slug = $_POST['slug'] ?? NULL;
 
-$fileName = '././files/data/orders.json';
+$fileName =  __DIR__ . '/../files/data/orders.json';
 
 if (!file_exists($fileName)) {
 	file_put_contents($fileName, '');
