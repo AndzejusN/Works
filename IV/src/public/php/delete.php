@@ -6,9 +6,12 @@ $id = $_POST['id'] ?? NULL;
 
 $result = array();
 
+$flag = 0;
 foreach ($orders as $order) {
-	if ($order['id'] != $id) {
+	if ($order['id'] != $id || $flag == 1) {
 		$result [] = $order;
+	} else {
+		$flag++;
 	}
 }
 
